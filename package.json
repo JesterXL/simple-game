@@ -1,0 +1,24 @@
+{
+  "name": "simple-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "elm-live src/Main.elm --start-page=src/index.html -- --output=elm.js --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JesterXL/simple-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JesterXL/simple-game/issues"
+  },
+  "homepage": "https://github.com/JesterXL/simple-game#readme",
+  "devDependencies": {
+    "elm": "^0.19.1-5",
+    "elm-live": "^4.0.2"
+  }
+}
