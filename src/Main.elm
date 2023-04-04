@@ -259,22 +259,32 @@ view model =
             , style "justify-content" "center"
             , style "align-items" "center"
             ]
-            (Canvas.toHtml
+            [ Canvas.toHtml
                 ( round canvasWidth, round canvasHeight )
                 [ style "border" "1px solid rgba(0,0,0,0.1)" ]
                 (clearScreen
                     :: componentToRect model.mySquare
                     :: drawWalls model.walls
                 )
-                :: viewGameButtons model
-            )
+            ]
+        , div
+            [ style "display" "flex"
+            , style "justify-content" "center"
+            , style "align-items" "center"
+            , style "padding-top" "8px"
+            ]
+            (viewGameButtons model)
         ]
 
 
 viewGameButtons : Model -> List (Html Msg)
 viewGameButtons model =
     if model.gameOver == False then
-        [ button [ onClick TogglePause ] [ Html.text "Pause" ]
+        [ if model.paused == True then
+            button [ onClick TogglePause ] [ Html.text "Unpause" ]
+
+          else
+            button [ onClick TogglePause ] [ Html.text "Pause" ]
         , button [ onMouseDown (Accelerate -0.2), onMouseUp (Accelerate 0.05) ] [ Html.text "Accelerate" ]
         ]
 
