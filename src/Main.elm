@@ -138,7 +138,7 @@ updateWalls randomNum makeNewWall walls =
                 , height = height
                 , speedX = -1
                 , speedY = 0
-                , x = toFloat x
+                , x = x
                 , y = 0.0
                 , gravity = 0
                 , gravitySpeed = 0 }
@@ -149,7 +149,7 @@ updateWalls randomNum makeNewWall walls =
                 , height = x - height - gap
                 , speedX = -1
                 , speedY = 0
-                , x = toFloat x
+                , x = x
                 , y = height + gap
                 , gravity = 0
                 , gravitySpeed = 0 }
@@ -198,53 +198,63 @@ view model =
             , style "align-items" "center"
             ]
             (
-                [ Canvas.toHtml
-                    ( canvasWidth, canvasHeight )
+                Canvas.toHtml
+                    ( (round canvasWidth), (round canvasHeight) )
                     [ style "border" "1px solid rgba(0,0,0,0.1)" ]
                     (
-                        [ clearScreen
-                        , componentToRect model.mySquare ]
-                        ++ (drawWalls model.walls)
+                        clearScreen
+                        :: componentToRect model.mySquare
+                        :: drawWalls model.walls
                     )
-                ] ++
-                (
-                    if model.gameOver == False then
-                        [ button [ onClick TogglePause ] [ Html.text "Pause" ]
-                        , button [ onMouseDown (Accelerate -0.2), onMouseUp (Accelerate 0.05) ] [ Html.text "Accelerate" ] 
-                        ]
-                    else
-                        [ div [][Html.text "Game Over"]]
-                )
+                
+                :: viewGameButtons model
             )
     ]
 
+viewGameButtons : Model -> List (Html Msg)
+viewGameButtons model =
+    if model.gameOver == False then
+        [ button [ onClick TogglePause ] [ Html.text "Pause" ]
+        , button [ onMouseDown (Accelerate -0.2), onMouseUp (Accelerate 0.05) ] [ Html.text "Accelerate" ] 
+        ]
+    else
+        [ div [][Html.text "Game Over"]]
+
+componentToRect : Component -> Canvas.Renderable
 componentToRect component =
     shapes
         [ fill (Color.hsl 0.5 0.3 0.7) ]
         [ rect ( component.x, component.y ) component.width component.height ]
 
+drawWalls : List Component -> List Canvas.Renderable
 drawWalls walls =
     walls
     |> List.map wallToRect
 
+wallToRect : Component -> Canvas.Renderable
 wallToRect wall =
     shapes
         [ fill (Color.rgb255 0 0 1) ]
         [ rect ( wall.x, wall.y ) wall.width wall.height ]
 
+canvasWidth : Float
 canvasWidth =
     480
 
+canvasHeight : Float
 canvasHeight =
     270
 
+centerX : Float
 centerX =
     canvasWidth / 2
 
 
+centerY : Float
 centerY =
     canvasHeight / 2
 
+clearScreen : Canvas.Renderable
 clearScreen =
     shapes [ fill Color.white ] [ rect ( 0, 0 ) canvasWidth canvasHeight ]
 

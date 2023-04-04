@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "elm-live src/Main.elm --start-page=src/index.html -- --output=elm.js --debug"
+    "start": "elm-live src/Main.elm --start-page=src/index.html -- --output=elm.js --debug",
+    "review": "elm-review"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/JesterXL/simple-game#readme",
   "devDependencies": {
     "elm": "^0.19.1-5",
-    "elm-live": "^4.0.2"
+    "elm-live": "^4.0.2",
+    "elm-review": "^2.9.2"
   }
 }
