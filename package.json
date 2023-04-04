@@ -1,7 +1,7 @@
 {
   "name": "simple-game",
   "version": "1.0.0",
-  "description": "",
+  "description": "simple flappy bird like game",
   "main": "index.js",
   "scripts": {
     "start": "elm-live src/Main.elm --start-page=src/index.html -- --debug",
