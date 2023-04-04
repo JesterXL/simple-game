@@ -253,7 +253,13 @@ testCrash square wall =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] [ Html.text ("Score:" ++ String.fromInt model.frame) ]
+        [ div
+            [ style "display" "flex"
+            , style "justify-content" "center"
+            , style "align-items" "center"
+            , style "padding-bottom" "8px"
+            ]
+            [ Html.text ("Score:" ++ String.fromInt model.frame) ]
         , div
             [ style "display" "flex"
             , style "justify-content" "center"
