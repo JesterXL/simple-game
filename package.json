@@ -7,10 +7,10 @@
     "start": "elm-live src/Main.elm --start-page=src/index.html -- --debug",
     "review": "elm-review",
     "build": "npm run clean && npm run compile && npm run uglify && npm run copy",
-    "clean": "rm -rf build",
+    "clean": "rm -rf docs",
     "compile": "elm make src/Main.elm --output=src/elm.js",
     "uglify": "npx uglify-js src/elm.js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe' | npx uglify-js --mangle --output src/elm.js",
-    "copy": "mkdir docs && cp src/elm.js docs/elm.js && cp src/index.html docs/index.html"
+    "copy": "mkdir docs && cp src/elm.js docs/elm.js && cp src/index.html docs/index.html && cp src/elm-canvas.js docs/elm-canvas.js"
   },
   "repository": {
     "type": "git",
