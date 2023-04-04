@@ -10,7 +10,7 @@
     "clean": "rm -rf build",
     "compile": "elm make src/Main.elm --output=src/elm.js",
     "uglify": "npx uglify-js src/elm.js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe' | npx uglify-js --mangle --output src/elm.js",
-    "copy": "mkdir build && cp src/elm.js build/elm.js && cp src/index.html build/index.html"
+    "copy": "mkdir docs && cp src/elm.js docs/elm.js && cp src/index.html docs/index.html"
   },
   "repository": {
     "type": "git",
