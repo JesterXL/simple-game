@@ -4,7 +4,6 @@ import Browser
 import Html exposing (Html, button, div, img)
 import Html.Events exposing (onClick, onMouseDown, onMouseUp )
 import Html.Attributes exposing (src, style, class)
-import Battle exposing (getRandomNumberFromRange, AttackMissesDeathProtectedTargets(..), Formation(..), Element(..),getHit, HitResult(..), hitResultToString, terraStats, playableTerra, dirk, lockeStats, terraAttacker, lockeTarget, playableLocke, getDamage, fireSpell, Attack(..), SpellPower(..), MagicPower(..), Level(..), Relic(..), EquippedRelics)
 import Random
 import Animator
 import Animator.Inline
