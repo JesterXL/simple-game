@@ -5,12 +5,8 @@ import Html exposing (Html, button, div, img)
 import Html.Events exposing (onClick, onMouseDown, onMouseUp )
 import Html.Attributes exposing (src, style, class)
 import Random
-import Animator
-import Animator.Inline
 import Time
-import Animator.Css
 import Color
-import Html.Lazy
 import Browser.Events exposing (onAnimationFrameDelta)
 import Canvas exposing (rect, shapes)
 import Canvas.Settings exposing (fill)
@@ -304,10 +300,13 @@ collides component otherComponent =
         True
 
 
+-- For now, we pass in Math.random() from JavaScript. At some point,
+-- we should get a better random number generator.
 init : Int -> (Model, Cmd Msg)
 init datRando =
     ( initialModel (Random.initialSeed datRando) , Cmd.none )
 
+-- if paused, stop sending animation frame updates
 subscriptions : Model -> Sub Msg
 subscriptions model =
     if model.paused == False then
