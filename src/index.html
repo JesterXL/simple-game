@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     /* you can style your program here */
   </style>
@@ -10,7 +11,8 @@
   <script src="elm.js"></script>
   <script>
     var app = Elm.Main.init({ 
-      node: document.querySelector('main')
+      node: document.querySelector('main'),
+      flags: Math.round(Math.random() * 100)
     })
     // you can use ports and stuff here
   </script>

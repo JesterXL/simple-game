@@ -191,30 +191,33 @@ testCrash square wall =
 
 view : Model -> Html Msg
 view model =
-    div
-        [ style "display" "flex"
-        , style "justify-content" "center"
-        , style "align-items" "center"
-        ]
-        (
-            [ Canvas.toHtml
-                ( canvasWidth, canvasHeight )
-                [ style "border" "1px solid rgba(0,0,0,0.1)" ]
-                (
-                    [ clearScreen
-                    , componentToRect model.mySquare ]
-                    ++ (drawWalls model.walls)
-                )
-            ] ++
+    div [][
+        div [][Html.text ("Score:" ++ (String.fromInt model.frameNo))]
+        , div
+            [ style "display" "flex"
+            , style "justify-content" "center"
+            , style "align-items" "center"
+            ]
             (
-                if model.gameOver == False then
-                    [ button [ onClick TogglePause ] [ Html.text "Pause" ]
-                    , button [ onMouseDown (Accelerate -0.2), onMouseUp (Accelerate 0.05) ] [ Html.text "Accelerate" ] 
-                    ]
-                else
-                    [ div [][Html.text "Game Over"]]
+                [ Canvas.toHtml
+                    ( canvasWidth, canvasHeight )
+                    [ style "border" "1px solid rgba(0,0,0,0.1)" ]
+                    (
+                        [ clearScreen
+                        , componentToRect model.mySquare ]
+                        ++ (drawWalls model.walls)
+                    )
+                ] ++
+                (
+                    if model.gameOver == False then
+                        [ button [ onClick TogglePause ] [ Html.text "Pause" ]
+                        , button [ onMouseDown (Accelerate -0.2), onMouseUp (Accelerate 0.05) ] [ Html.text "Accelerate" ] 
+                        ]
+                    else
+                        [ div [][Html.text "Game Over"]]
+                )
             )
-        )
+    ]
 
 componentToRect component =
     shapes
@@ -231,10 +234,10 @@ wallToRect wall =
         [ rect ( wall.x, wall.y ) wall.width wall.height ]
 
 canvasWidth =
-    640
+    480
 
 canvasHeight =
-    480
+    270
 
 centerX =
     canvasWidth / 2
@@ -245,12 +248,6 @@ centerY =
 
 clearScreen =
     shapes [ fill Color.white ] [ rect ( 0, 0 ) canvasWidth canvasHeight ]
-
-
-
--- redraw : Component -> Component
--- redraw component =
-
 
 newPos : Component -> Component
 newPos component =
@@ -298,9 +295,9 @@ collides component otherComponent =
         True
 
 
-init : () -> (Model, Cmd Msg)
-init _ =
-    ( initialModel (Random.initialSeed 42) , Cmd.none )
+init : Int -> (Model, Cmd Msg)
+init datRando =
+    ( initialModel (Random.initialSeed datRando) , Cmd.none )
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
@@ -309,7 +306,7 @@ subscriptions model =
     else
         Sub.none
 
-main : Program () Model Msg
+main : Program Int Model Msg
 main =
     Browser.element
         { init = init
